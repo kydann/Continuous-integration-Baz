@@ -60,26 +60,81 @@
                                     
 									<hr class="major" />
 
-									<h2>Comencemos...</h2>
-									<p>Una vez estando dentro de nuestro espacio en gitlab, es necesario crear un access token con el cual tendremos que habilitarlo en jenkins para la comunicacion entre uno y otro. Esto se encuentra en las configuraciones de perfil donde se generara nuestro access token, como lo muestra la siguiente imagen: </p>
-                                    
+									<h2>Agregar Token</h2>
+									<p>El token obtenido en gitlab es necesario para esta parte ya que es el acceso a jenkins desde gitlab para asi realizar la conexion de ambas tecnologias, en este apartado es recomendable colocar un ID y descripcion de que tipo es esta credencial ya que manejaremos diversas credenciales.</p>
                                     <span class="image">
-                                    <img src="images/1490713861_757_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%" height="auto" />
+                                    <img src="images/token.png" width="100%" height="auto" />
                                     </span>
                                     
                                     <br/>
                                     
-                                    <p>Nos generara un token parecido a esto:</p>
+                                    <p><strong>Debe dar una credencial asi como el ejemplo:</strong></p>
                                     
                                     <span class="image">
-                                    <img src="images/1490713861_700_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%" height="auto" />
+                                    <img src="images/tokenAsign.png" width="100%" height="auto" />
                                     </span>
                                     
 									<hr class="major" />
 
-									<h2> </h2>
-									<p> </p>
-									<p> </p>
+									<h2>Configuracion-Jenkins-gitlab</h2>
+									<p>Nos dirigimos al apartado de [Aministrar Jenkins] --> [Configurar Sistema] --> [Gitlab] </p>
+									<p>En la opcion credentials debe ser la agregada anteriormente.</p>
+
+									<span class="image">
+										<img src="images/configGit.png" width="100%" height="auto" />
+									</span>
+
+									<hr class="major" />
+
+									<h2>Agregar un espacio de trabajo.</h2>
+									
+									<p>Regresamos al dashboard de jenkins, es hora de crear una nueva tarea.</p>
+									<span class="image">
+										<img src="images/Selección_001.png" width="100%" height="auto" />
+									</span>
+									
+									<p>Creada la tarea nos mandara a configurar los procesos de jenkins en el proyecto. 
+										<br/>
+										En la pestaña General aparecera en Gitlab Connection la credencial por default antes agregada.
+									</p>
+									<span class="image">
+										<img src="images/Selección_002.png" width="100%" height="auto" />
+									</span>
+
+									<p>En la pestaña triggers solo debe seleccionarse la casilla: 
+										<br/>
+										<strong>Build when a change is pushed to GitLab. GitLab webhook URL: http://172.17.0.1:8080/project/spring (Nota: El link varia depende el host en el que este montado)</strong>
+										<br/>
+									   Es importante tomar en cuenta esta URL y el token que se genera, ya que estas seran ingresadas en la configuración del proyecto guardado en Gitlab 
+									</p>
+									<span class="image">
+										<img src="images/Selección_003.png" width="100%" height="auto" />
+									</span>
+
+									<p>La configuracion de estas debe estar en Gitlab ubicados en nuestro proyecto, en el cual es necesario ir a [Settings] ---> [Integrations]</p>
+									<span class="image">
+										<img src="images/Selección_004.png" width="100%" height="auto" />
+									</span>
+									<p>Una vez dentro de esta opción tendremos que copiar y pegar la URL y el Token obtenidos para crear el Webhook correspondiente para que se genere la conexion y ejecute el pipeline que debe estar dentro de nuestro proyecto.</p>
+									<span class="image">
+										<img src="images/Selección_006.png" width="100%" height="auto" />
+									</span>
+									<p>Pulsamos en <strong>Add Webhook</strong> para guardar nuestro puente de conexión, el cual nos servira al momento de realizar un commit y push jenkins de esta manera pueda detectar que hubo cambios y comienze a ejecutar el Jenkinsfile (Pipeline).</p>
+									<h2>Regresamos a la terminación de configuracion</h2>
+									<p>El siguiente paso es simplemente <strong>Guardar</strong> las configuraciones.</p>
+									<span class="image">
+										<img src="images/Selección_007.png" width="100%" height="auto" />
+									</span>
+
+									<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px" height="30px"/></h2>
+									<span class="image">
+										<img src="images/pipeline.png" width="100%" height="auto" />
+									</span>
+									
+									<p>Una vez hecho un push comenzara a ejecutar los pasos establecidos en el Jenkinsfile si es todo correcto pintara el Stage View en verde pero en caso de algun fallo debera mandarlo de color Rojo.</p>
+									<span class="image">
+										<img src="images/captura.png" width="100%" height="auto" />
+									</span>
 
 								</section>
 
@@ -103,7 +158,7 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="index.html">Homepage</a></li>
+										<li><a href="index.html">Inicio</a></li>
 										<li><a href="#">Manual completo</a></li>
 										<!--<li><a href="elements.html"></a></li>-->
 										<li>
