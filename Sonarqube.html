@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Configuracion-Gitlab</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Configuracion Gitlab</strong></a>
+									<ul class="icons">
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Gitlab Config.</h1>
+									</header>
+
+									<span class="image main"><img src="images/50-git_gitlab.png" width="520px" height="auto" alt="" /></span>
+
+									<hr class="major" />
+
+									<h2>Primeros pasos...</h2>
+									<p>Al acceder a Gitlab, es necesario agregar configuraciones desde el dashboard para habilitar la comunicacion desde que se produce un commit jenkins comienza a trabajar depende el <strong>Pipeline</strong> que se asigne a cada proyecto para llevar acabo sus procesos desde la construccion de los Jar con maven al igual que la construccion de una imagen docker de el mismo o puede ser algun otro trabajo en otro lenguaje soportado por jenkins.</p>
+                                    <span class="image">
+                                    <img src="images/1490713855_686_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%" height="auto" />
+                                    </span>
+                                    
+									<hr class="major" />
+
+									<h2>Comencemos...</h2>
+									<p>Una vez estando dentro de nuestro espacio en gitlab, es necesario crear un access token con el cual tendremos que habilitarlo en jenkins para la comunicacion entre uno y otro. Esto se encuentra en las configuraciones de perfil donde se generara nuestro access token, como lo muestra la siguiente imagen: </p>
+                                    
+                                    <span class="image">
+                                    <img src="images/1490713861_757_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%" height="auto" />
+                                    </span>
+                                    
+                                    <br/>
+                                    
+                                    <p>Nos generara un token parecido a esto:</p>
+                                    
+                                    <span class="image">
+                                    <img src="images/1490713861_700_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%" height="auto" />
+                                    </span>
+                                    
+                                    <p>Este token generado se debe copiar a una credencial que a continuación sera creada en jenkins, es muy importante este paso ya que nos solicitara acceso con esta credencial. <a href="ConfigJenkins.html"> Agregar Credencial Token ------></a></p>
+                                    
+									<hr class="major" />
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Inicio</a></li>
+										<li><a href="#">Manual completo</a></li>
+										<!--<li><a href="elements.html"></a></li>-->
+										<li>
+											<span class="opener">Entrar a Portales CI|CD</span>
+											<ul>
+												<li><a href="http://10.51.251.148:9000">Portainer</a></li>
+												<li><a href="http://10.51.251.148:8081">Sonatype Nexus</a></li>
+												<li><a href="http://10.51.251.148:8080">Jenkins</a></li>
+												<li><a href="http://10.51.251.150:9997">Gitlab</a></li>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+                                
+							<!-- Section 
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+                                -->
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Contacto</h2>
+									</header>
+									<p></p>
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="#">christian.sayago@elektra.com.mx</a></li>
+										<li class="fa-phone">(55) 21-00-83-83</li>
+										<li class="fa-home">Torre Jade<br />
+										</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Grupo Salinas. All rights reserved. Design: <a href="#">Banco Azteca</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
