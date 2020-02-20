@@ -138,7 +138,160 @@
 
 									<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px" height="30px"/></h2>
 									<span class="image">
-										<img src="images/pipeline.png" width="100%" height="auto" />
+										<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
+										node {
+    
+											def pom = readMavenPom file: 'pom.xml'
+											def developmentArtifactVersion = "${pom.version}"
+											def jarName = "${pom.name}"
+											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");
+											
+											"$jarName" 
+											
+											jdk = tool name: 'JDK_11'
+											env.JAVA_HOME = "${jdk}"
+											echo "jdk installation path is: ${jdk}"
+											sh "${jdk}/bin/java -version"
+											sh '$JAVA_HOME/bin/java -version'
+										
+											checkout scm
+											
+											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() 
+											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)
+											  
+											  echo "Commit Message: $result"
+										
+											  echo "Variable dev: $dev"
+										
+											if (dev != 1) {
+											
+												echo "Production Stages..."
+										
+												stage('Iniciando Ejecución'){
+												
+													echo 'Tardara unos minutos... '
+													
+												}
+											
+												stage('Compilacion'){
+														sh 'java -version'
+														echo 'Limpiando y Compilando aplicacion'
+														sh 'mvn clean package'
+										
+												}
+												
+												stage('Sonarqube Coverage'){
+														echo 'Calidad de codigo'
+														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'
+										
+												}
+										
+												stage('Construccion'){ 
+														echo 'Creando JAR'
+														sh 'mvn install -Dmaven.test.skip=true'
+										
+												}
+										
+												stage('Dockerizando'){
+														echo 'Dockerizando aplicacion'
+														sh 'docker images'
+														sh 'docker ps'
+														sh "mvn package dockerfile:build"
+										
+												}
+												
+												stage('Upload JAR to Nexus repository'){
+														echo 'Subiendo JAR'
+														sh 'mvn deploy'
+												}
+												
+												stage('Upload to Harbor repository'){
+												
+														echo 'Subiendo a Harbor'
+														sh "docker login -u b366944 -p Promociones123 reg.bazops.corp"				
+														sh "docker push reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion"
+														
+												}
+												
+												stage('Upload Docker Image to Nexus repository'){
+														echo 'tag Image'
+														sh "docker tag reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"
+														
+														echo 'Subiendo Imagen docker'
+														sh "docker push 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"
+														sh "docker rmi -f 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"
+												}
+												
+												
+												stage('Cerrando Ejecución'){
+													echo 'Completado'
+												}
+												
+											} else {
+											
+												echo "Develoop Stages..."
+												
+												stage('Iniciando Ejecución'){
+													echo 'Tardara unos minutos...'
+												}
+										
+												stage('Compilacion'){
+														
+														sh 'java -version'
+														echo 'Limpiando y Compilando aplicacion'
+														sh 'mvn clean package'
+													
+												}
+												
+												stage('Sonarqube Coverage'){
+														echo ''
+														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'
+													
+										
+												}
+										
+												stage('Construccion'){
+													
+														echo '****************************************************'
+														echo '******************Inhabilitado**********************'
+														echo '****************************************************'
+										
+												}
+										
+												stage('Dockerizando'){
+										
+														echo '****************************************************'
+														echo '******************Inhabilitado**********************'
+														echo '****************************************************'
+										
+												}
+										
+												stage('Upload JAR to Nexus repository'){
+														echo '****************************************************'
+														echo '******************Inhabilitado**********************'
+														echo '****************************************************'
+												}
+												
+												stage('Upload to Harbor repository'){
+												
+														echo 'Subiendo a Harbor'
+														//sh 'docker push 10.51.251.49:8082/data-persistence'
+														
+												}
+										
+												stage('Upload Docker Image to Nexus repository'){
+														echo '****************************************************'
+														echo '******************Inhabilitado**********************'
+														echo '****************************************************'
+												}
+												
+												stage('Cerrando Ejecución'){
+													echo 'Completado'
+												}
+										
+											}
+										}
+										
 									</span>
 									
 									<p>Una vez hecho un push comenzara a ejecutar los pasos establecidos en el Jenkinsfile si es todo correcto pintara el Stage View en verde pero en caso de algun fallo debera mandarlo de color Rojo.</p>
@@ -169,46 +322,9 @@
 									</header>
 									<ul>
 										<li><a href="index.html">Inicio</a></li>
-										<li><a href="#">Manual completo</a></li>
-										<!--<li><a href="elements.html"></a></li>-->
-										<li>
-											<span class="opener">Entrar a Portales CI|CD</span>
-											<ul>
-												<li><a href="http://10.51.251.148:9000">Portainer</a></li>
-												<li><a href="http://10.51.251.148:8081">Sonatype Nexus</a></li>
-												<li><a href="http://10.51.251.148:8080">Jenkins</a></li>
-												<li><a href="http://10.51.251.150:9997">Gitlab</a></li>
-											</ul>
-										</li>
 									</ul>
 								</nav>
                                 
-							<!-- Section 
-								<section>
-									<header class="major">
-										<h2>Ante interdum</h2>
-									</header>
-									<div class="mini-posts">
-										<article>
-											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
-											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
-										</article>
-									</div>
-									<ul class="actions">
-										<li><a href="#" class="button">More</a></li>
-									</ul>
-								</section>
-                                -->
-
-							<!-- Section -->
 								<section>
 									<header class="major">
 										<h2>Contacto</h2>
