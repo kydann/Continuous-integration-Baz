@@ -141,13 +141,13 @@
 										<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
 										node {
 
-											<br/>
+											<br/><br/>
 											def pom = readMavenPom file: 'pom.xml'<br/>
 											def developmentArtifactVersion = "${pom.version}"<br/>
 											def jarName = "${pom.name}"<br/>
-											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/>
+											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/><br/>
 											
-											"$jarName" <br/>
+											"$jarName" <br/><br/>
 											
 											jdk = tool name: 'JDK_11'<br/>
 											env.JAVA_HOME = "${jdk}"<br/>
@@ -158,9 +158,9 @@
 											checkout scm<br/><br/>
 											
 											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() <br/>
-											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/>
+											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/><br/>
 											  
-											  echo "Commit Message: $result"<br/>
+											  echo "Commit Message: $result"<br/><br/>
 										
 											  echo "Variable dev: $dev"<br/><br/>
 										
@@ -168,67 +168,60 @@
 											
 												echo "Production Stages..."<br/><br/>
 										
-												stage('Iniciando Ejecución'){<br/>
+												stage('Iniciando Ejecución'){<br/><br/>
 												
-													echo 'Tardara unos minutos... '<br/>
+													echo 'Tardara unos minutos... '<br/><br/>
 													
-												}<br/>
+												}<br/><br/>
 											
 												stage('Compilacion'){<br/>
 														sh 'java -version'<br/>
 														echo 'Limpiando y Compilando aplicacion'<br/>
-														sh 'mvn clean package'
-										
-												}<br/>
+														sh 'mvn clean package'<br/>	
+												}<br/><br/>
 												
-												stage('Sonarqube Coverage'){
-														echo 'Calidad de codigo'
-														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'
+												stage('Sonarqube Coverage'){<br/>
+														echo 'Calidad de codigo'<br/>
+														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br/>										
+												}<br/><br/>
 										
-												}
+												stage('Construccion'){ <br/>
+														echo 'Creando JAR'<br/>
+														sh 'mvn install -Dmaven.test.skip=true'<br/>										
+												}<br/><br/>
 										
-												stage('Construccion'){ 
-														echo 'Creando JAR'
-														sh 'mvn install -Dmaven.test.skip=true'
-										
-												}
-										
-												stage('Dockerizando'){
-														echo 'Dockerizando aplicacion'
-														sh 'docker images'
-														sh 'docker ps'
-														sh "mvn package dockerfile:build"
-										
-												}
+												stage('Dockerizando'){<br/>
+														echo 'Dockerizando aplicacion'<br/>
+														sh 'docker images'<br/>
+														sh 'docker ps'<br/>
+														sh "mvn package dockerfile:build"<br/>
+												}<br/><br/>
 												
-												stage('Upload JAR to Nexus repository'){
-														echo 'Subiendo JAR'
-														sh 'mvn deploy'
-												}
+												stage('Upload JAR to Nexus repository'){<br/>
+														echo 'Subiendo JAR'<br/>
+														sh 'mvn deploy'<br/>
+												}<br/><br/>
 												
-												stage('Upload to Harbor repository'){
+												stage('Upload to Harbor repository'){<br/>												
+														echo 'Subiendo a Harbor'<br/>
+														sh "docker login -u b366944 -p Promociones123 reg.bazops.corp"<br/>				
+														sh "docker push reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion"<br/>														
+												}<br/><br/>
 												
-														echo 'Subiendo a Harbor'
-														sh "docker login -u b366944 -p Promociones123 reg.bazops.corp"				
-														sh "docker push reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion"
+												stage('Upload Docker Image to Nexus repository'){<br/>
+														echo 'tag Image'<br/>
+														sh "docker tag reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br/><br/>
 														
-												}
+														echo 'Subiendo Imagen docker'<br/>
+														sh "docker push 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br/>
+														sh "docker rmi -f 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br/>
+												}<br/><br/>
+																								
+												stage('Cerrando Ejecución'){<br/>
+													echo 'Completado'<br/>
+												}<br/><br/>
 												
-												stage('Upload Docker Image to Nexus repository'){
-														echo 'tag Image'
-														sh "docker tag reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"
-														
-														echo 'Subiendo Imagen docker'
-														sh "docker push 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"
-														sh "docker rmi -f 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"
-												}
-												
-												
-												stage('Cerrando Ejecución'){
-													echo 'Completado'
-												}
-												
-											} else {
+											} else {<br/>
 											
 												echo "Develoop Stages..."
 												
