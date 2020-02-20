@@ -221,70 +221,61 @@
 													echo 'Completado'<br/>
 												}<br/><br/>
 												
-											} else {<br/>
+											} else {<br/><br/>
 											
-												echo "Develoop Stages..."
+												echo "Develoop Stages..."<br/><br/>
 												
-												stage('Iniciando Ejecución'){
-													echo 'Tardara unos minutos...'
-												}
+												stage('Iniciando Ejecución'){<br/>
+													echo 'Tardara unos minutos...'<br/>
+												}<br/><br/>
 										
-												stage('Compilacion'){
-														
-														sh 'java -version'
-														echo 'Limpiando y Compilando aplicacion'
-														sh 'mvn clean package'
-													
-												}
+												stage('Compilacion'){<br/>
+														sh 'java -version'<br/>
+														echo 'Limpiando y Compilando aplicacion'<br/>
+														sh 'mvn clean package'<br/>
+												}<br/><br/>
 												
-												stage('Sonarqube Coverage'){
-														echo ''
-														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'
-													
+												stage('Sonarqube Coverage'){<br/>
+														echo 'Calificando codigo'<br/>
+														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br/>
+												}<br/><br/>
 										
-												}
+												stage('Construccion'){<br/>													
+														echo '****************************************************'<br/>
+														echo '******************Inhabilitado**********************'<br/>
+														echo '****************************************************'<br/>										
+												}<br/><br/>
 										
-												stage('Construccion'){
-													
-														echo '****************************************************'
-														echo '******************Inhabilitado**********************'
-														echo '****************************************************'
+												stage('Dockerizando'){<br/>													
+													echo '****************************************************'<br/>
+													echo '******************Inhabilitado**********************'<br/>
+													echo '****************************************************'<br/>										
+											}<br/><br/>
 										
-												}
-										
-												stage('Dockerizando'){
-										
-														echo '****************************************************'
-														echo '******************Inhabilitado**********************'
-														echo '****************************************************'
-										
-												}
-										
-												stage('Upload JAR to Nexus repository'){
-														echo '****************************************************'
-														echo '******************Inhabilitado**********************'
-														echo '****************************************************'
-												}
+												stage('Upload JAR to Nexus repository'){<br/>													
+													echo '****************************************************'<br/>
+													echo '******************Inhabilitado**********************'<br/>
+													echo '****************************************************'<br/>										
+											}<br/><br/>
 												
-												stage('Upload to Harbor repository'){
-												
-														echo 'Subiendo a Harbor'
-														//sh 'docker push 10.51.251.49:8082/data-persistence'
-														
-												}
+												stage('Upload to Harbor repository'){<br/>													
+													echo '****************************************************'<br/>
+													echo '******************Inhabilitado**********************'<br/>
+													echo '****************************************************'<br/>										
+											}<br/><br/>
 										
-												stage('Upload Docker Image to Nexus repository'){
-														echo '****************************************************'
-														echo '******************Inhabilitado**********************'
-														echo '****************************************************'
-												}
+												stage('Upload Docker Image to Nexus repository'){<br/>													
+													echo '****************************************************'<br/>
+													echo '******************Inhabilitado**********************'<br/>
+													echo '****************************************************'<br/>										
+											}<br/><br/>
 												
-												stage('Cerrando Ejecución'){
-													echo 'Completado'
-												}
+												stage('Cerrando Ejecución'){<br/>
+													echo 'Completado'<br/>
+												}<br/><br/>
 										
-											}
-										}
+											}<br/>
+										}<br/>
 										
 									</span>
 									
