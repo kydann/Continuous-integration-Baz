@@ -152,13 +152,9 @@
 
 											<h2>/* Se imprime el nombre con el que se realizara un Tag */</h2>
 											
-											<br/>
-											
 											echo "$jarName" <br/>
 
 											<h2>/* Se define en este caso la version de Java para el proyecto */</h2>
-											
-											<br/>
 											
 											jdk = tool name: 'JDK_11'<br/>
 											env.JAVA_HOME = "${jdk}"<br/>
@@ -167,7 +163,7 @@
 											sh '$JAVA_HOME/bin/java -version'<br/><br/>
 										
 											checkout scm<br/><br/>
-											
+
 											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() <br/>
 											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/><br/>
 											  
