@@ -148,13 +148,13 @@
 											def pom = readMavenPom file: 'pom.xml'<br/>
 											def developmentArtifactVersion = "${pom.version}"<br/>
 											def jarName = "${pom.name}"<br/>
-											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/><br/>
+											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/>
 
 											<h2>/* Se imprime el nombre con el que se realizara un Tag */</h2>
 											
 											<br/>
 											
-											echo "$jarName" <br/><br/>
+											echo "$jarName" <br/>
 
 											<h2>/* Se define en este caso la version de Java para el proyecto */</h2>
 											
