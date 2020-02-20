@@ -142,6 +142,7 @@
 										node {
 
 											<br/><br/>
+
 											<h2>/*Se define el nombre y version de la aplicacion para docker*/</h2>
 
 											def pom = readMavenPom file: 'pom.xml'<br/>
@@ -149,11 +150,16 @@
 											def jarName = "${pom.name}"<br/>
 											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/><br/>
 
-											/* Se imprime el nombre con el que se realizara un Tag */<br/><br/>
+											<h2>/* Se imprime el nombre con el que se realizara un Tag */</h2>
+											
+											<br/><br/>
 											
 											echo "$jarName" <br/><br/>
 
-											/* Se define en este caso la version de Java para el proyecto *<br/><br/>
+											<h2>/* Se define en este caso la version de Java para el proyecto */</h2>
+											
+											<br/><br/>
+											
 											jdk = tool name: 'JDK_11'<br/>
 											env.JAVA_HOME = "${jdk}"<br/>
 											echo "jdk installation path is: ${jdk}"<br/>
