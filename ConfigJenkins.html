@@ -140,45 +140,46 @@
 									<span class="image">
 										<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
 										node {
-    
-											def pom = readMavenPom file: 'pom.xml'
-											def developmentArtifactVersion = "${pom.version}"
-											def jarName = "${pom.name}"
-											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");
+
+											<br/>
+											def pom = readMavenPom file: 'pom.xml'<br/>
+											def developmentArtifactVersion = "${pom.version}"<br/>
+											def jarName = "${pom.name}"<br/>
+											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/>
 											
-											"$jarName" 
+											"$jarName" <br/>
 											
-											jdk = tool name: 'JDK_11'
-											env.JAVA_HOME = "${jdk}"
-											echo "jdk installation path is: ${jdk}"
-											sh "${jdk}/bin/java -version"
-											sh '$JAVA_HOME/bin/java -version'
+											jdk = tool name: 'JDK_11'<br/>
+											env.JAVA_HOME = "${jdk}"<br/>
+											echo "jdk installation path is: ${jdk}"<br/>
+											sh "${jdk}/bin/java -version"<br/>
+											sh '$JAVA_HOME/bin/java -version'<br/><br/>
 										
-											checkout scm
+											checkout scm<br/><br/>
 											
-											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() 
-											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)
+											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() <br/>
+											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/>
 											  
-											  echo "Commit Message: $result"
+											  echo "Commit Message: $result"<br/>
 										
-											  echo "Variable dev: $dev"
+											  echo "Variable dev: $dev"<br/><br/>
 										
-											if (dev != 1) {
+											if (dev != 1) {<br/>
 											
-												echo "Production Stages..."
+												echo "Production Stages..."<br/><br/>
 										
-												stage('Iniciando Ejecución'){
+												stage('Iniciando Ejecución'){<br/>
 												
-													echo 'Tardara unos minutos... '
+													echo 'Tardara unos minutos... '<br/>
 													
-												}
+												}<br/>
 											
-												stage('Compilacion'){
-														sh 'java -version'
-														echo 'Limpiando y Compilando aplicacion'
+												stage('Compilacion'){<br/>
+														sh 'java -version'<br/>
+														echo 'Limpiando y Compilando aplicacion'<br/>
 														sh 'mvn clean package'
 										
-												}
+												}<br/>
 												
 												stage('Sonarqube Coverage'){
 														echo 'Calidad de codigo'
