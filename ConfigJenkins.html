@@ -148,7 +148,7 @@
 											def developmentArtifactVersion = "${pom.version}"<br/>
 											def jarName = "${pom.name}"<br/>
 											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/><br/>
-											/* Se imprime el nombre con el que se realizara un Tag */
+											/* Se imprime el nombre con el que se realizara un Tag */<br/><br/>
 											echo "$jarName" <br/><br/>
 											
 											jdk = tool name: 'JDK_11'<br/>
