@@ -154,67 +154,77 @@
 						<img src="images/Selección_007.png" width="100%" height="auto" />
 					</span>
 
-					<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px"
-							height="30px" /></h2>
+					<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px" height="30px" /></h2>
 
 					<style>
-						pre {
+						#pre {
 							background: #262720;
 							-webkit-border-radius: 10px;
 							border-radius: 10px;
 							font-family: Consolas, sans-serif;
 							padding: 8px;
-							font-size: .95em;
+							font-size: small;
 							color: #fff;
 							overflow: auto;
 							width: 100%;
 							max-width: 1200px;
 						}
 
-						pre .kw1,
-						pre .me1 {
+						#pre .kw1,
+						#pre .me1 {
 							color: #00d6ff;
 						}
 
-						pre .sy0 {
+						#pre .sy0 {
 							color: #f92772;
 						}
 
-						pre .br0 {
+						#pre .br0 {
 							color: #aaa;
 						}
 
-						pre .st0 {
+						#pre .st0 {
 							color: #fff8ab;
+						}
+
+						#pre .par {
+							color: red;
 						}
 					</style>
 
-						<pre>
+					<div id="pre">
 
-						<span class="kw1"> node { </span>
+						<p class="kw1"> node { </p>
 
-						<p>/*Se define el nombre y version de la aplicacion para docker*/</p>
+						<p class="par">/*Se define el nombre y version de la aplicacion para docker*/</p>
 
-						def pom = readMavenPom file: 'pom.xml'<br />
-						def developmentArtifactVersion = "${pom.version}"<br />
-						def jarName = "${pom.name}"<br />
-						def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br />
+						<p class="st0">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def pom = readMavenPom file: 'pom.xml'<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def developmentArtifactVersion = "${pom.version}"<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def jarName = "${pom.name}"<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");
+						</p>
 
-						<h4>/* Se imprime el nombre con el que se realizara un Tag */</h4>
+						<p class="par">/* Se imprime el nombre con el que se realizara un Tag */</p>
 
-						echo "$jarName" <br />
+						<p class="kw1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "$jarName"</p>  
 
-						<h4>/* Se define en este caso la version de Java para el proyecto */</h4>
+						<p class="par">/* Se define en este caso la version de Java para el proyecto */</p>
 
-						jdk = tool name: 'JDK_11'<br />
-						env.JAVA_HOME = "${jdk}"<br />
-						echo "jdk installation path is: ${jdk}"<br />
-						sh "${jdk}/bin/java -version"<br />
-						sh '$JAVA_HOME/bin/java -version'<br /><br />
+						<span class="st0">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jdk = tool name: 'JDK_11'<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env.JAVA_HOME = "${jdk}"<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "jdk installation path is: ${jdk}"<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh "${jdk}/bin/java -version"<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh '$JAVA_HOME/bin/java -version'
+					</span>
+						
+					<br/><br/>
 
-						checkout scm<br />
+					<p class="kw1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;checkout scm</p>
+					
 
-						<h4>/* Las siguientes lineas, son dedicadas para obtener el commit del log, en este caso
+					<p class="par">/* Las siguientes lineas, son dedicadas para obtener el commit del log, en este caso
 							validaremos con el
 							commit una etiqueta que entrara en el filtro para ejecutar ciertos escenarios. En el caso de
 							un
@@ -222,32 +232,32 @@
 							hacer un
 							commit pero con la etiqueta [prod] en el comentario, comenzara el proceso completo para
 							Productivo.
-							*/</h4>
+							*/</p>
 
-						def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
 						<br />
-						def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br /><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br /><br />
 
 						<h4>/*Imprimimos el valor agregado a las variables*/</h4>
 
-						echo "Commit Message: $result"<br /><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Commit Message: $result"<br /><br />
 
-						echo "Variable dev: $dev"<br /><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Variable dev: $dev"<br /><br />
 
 						<h4>/*Comienza el filtro de lo anterior comentado*/</h4>
 						<h4>/*En caso de que encuentre en el commit el tag [prod], este agregara un numero 0 y comenzara
 							el proceso de los stages de
 							Produccion y de lo contrario los procesos de develoop*/</h4>
 
-						if (dev != 1) {<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (dev != 1) {<br />
 
 						<h4>Desde Aqui Comienza los escenarios para Productivo</h4>
 
-						echo "Produccion Stages..."<br /><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Produccion Stages..."<br /><br />
 
-						stage('Iniciando Ejecución'){<br /><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Iniciando Ejecución'){<br /><br />
 
-						echo 'Tardara unos minutos... '<br /><br />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo 'Tardara unos minutos... '<br /><br />
 
 						}<br /><br />
 
