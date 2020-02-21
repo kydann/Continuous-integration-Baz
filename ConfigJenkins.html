@@ -143,18 +143,18 @@
 
 											<br/><br/>
 
-											<h3>/*Se define el nombre y version de la aplicacion para docker*/</h3>
+											<h4>/*Se define el nombre y version de la aplicacion para docker*/</h4>
 
 											def pom = readMavenPom file: 'pom.xml'<br/>
 											def developmentArtifactVersion = "${pom.version}"<br/>
 											def jarName = "${pom.name}"<br/>
 											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/>
 
-											<h3>/* Se imprime el nombre con el que se realizara un Tag */</h3>
+											<h4>/* Se imprime el nombre con el que se realizara un Tag */</h4>
 											
 											echo "$jarName" <br/>
 
-											<h3>/* Se define en este caso la version de Java para el proyecto */</h3>
+											<h4>/* Se define en este caso la version de Java para el proyecto */</h4>
 											
 											jdk = tool name: 'JDK_11'<br/>
 											env.JAVA_HOME = "${jdk}"<br/>
@@ -162,20 +162,24 @@
 											sh "${jdk}/bin/java -version"<br/>
 											sh '$JAVA_HOME/bin/java -version'<br/><br/>
 										
-											checkout scm
+											checkout scm<br/>
 
-											<h3>/* Las siguientes lineas,  son dedicadas para obtener el commit del log, en este caso validaremos con el
+											<h4>/* Las siguientes lineas,  son dedicadas para obtener el commit del log, en este caso validaremos con el
 												commit una etiqueta que entrara en el filtro para ejecutar ciertos escenarios. En el caso de un 
 												comentario sin etiqueta realizara los procesos de solamente Desarrollo y por lo contrario al hacer un 
 												commit pero con la etiqueta [prod] en el comentario, comenzara el proceso completo para Productivo.
-												*/</h3>
+												*/</h4>
 
 											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() <br/>
 											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/><br/>
+
+											  <h4>/*Imprimimos el valor agregado a las variables*/</h4>
 											  
 											  echo "Commit Message: $result"<br/><br/>
 										
 											  echo "Variable dev: $dev"<br/><br/>
+
+											  <h4>/*Comienza el filtro de lo anterior comentado*/</h4>
 										
 											if (dev != 1) {<br/>
 											
