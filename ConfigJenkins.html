@@ -168,6 +168,7 @@
 							color: #fff;
 							overflow: auto;
 							width: 100%;
+							max-width: 1000px;
 						}
 
 						pre .kw1,
@@ -187,15 +188,12 @@
 							color: #fff8ab;
 						}
 					</style>
-					<span class="image">
-						<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
 
 						<pre>
-						node {
 
-						<br /><br />
+						<span class="kw1"> node { </span>
 
-						<h4>/*Se define el nombre y version de la aplicacion para docker*/</h4>
+						<p>/*Se define el nombre y version de la aplicacion para docker*/</p>
 
 						def pom = readMavenPom file: 'pom.xml'<br />
 						def developmentArtifactVersion = "${pom.version}"<br />
