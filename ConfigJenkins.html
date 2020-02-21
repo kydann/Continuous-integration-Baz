@@ -234,24 +234,28 @@
 							Productivo.
 							*/</p>
 
+							<span class="st0">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
 						<br />
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br /><br />
+					</span>
 
-						<h4>/*Imprimimos el valor agregado a las variables*/</h4>
+						<p class="par">/*Imprimimos el valor agregado a las variables*/</p>
 
+						<span class="st0">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Commit Message: $result"<br /><br />
 
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Variable dev: $dev"<br /><br />
+						</span>
 
-						<h4>/*Comienza el filtro de lo anterior comentado*/</h4>
-						<h4>/*En caso de que encuentre en el commit el tag [prod], este agregara un numero 0 y comenzara
+						<p class="par">/*Comienza el filtro de lo anterior comentado*/
+						/*En caso de que encuentre en el commit el tag [prod], este agregara un numero 0 y comenzara
 							el proceso de los stages de
-							Produccion y de lo contrario los procesos de develoop*/</h4>
+							Produccion y de lo contrario los procesos de develoop*/</p>
 
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (dev != 1) {<br />
 
-						<h4>Desde Aqui Comienza los escenarios para Productivo</h4>
+						<p class="par">Desde Aqui Comienza los escenarios para Productivo</p>
 
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Produccion Stages..."<br /><br />
 
