@@ -156,8 +156,41 @@
 
 					<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px"
 							height="30px" /></h2>
+
+					<style>
+						pre {
+							background: #262720;
+							-webkit-border-radius: 10px;
+							border-radius: 10px;
+							font-family: Consolas, sans-serif;
+							padding: 8px;
+							font-size: .95em;
+							color: #fff;
+							overflow: auto;
+							width: 100%;
+						}
+
+						pre .kw1,
+						pre .me1 {
+							color: #00d6ff;
+						}
+
+						pre .sy0 {
+							color: #f92772;
+						}
+
+						pre .br0 {
+							color: #aaa;
+						}
+
+						pre .st0 {
+							color: #fff8ab;
+						}
+					</style>
 					<span class="image">
 						<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
+
+						<pre>
 						node {
 
 						<br /><br />
@@ -204,12 +237,13 @@
 						echo "Variable dev: $dev"<br /><br />
 
 						<h4>/*Comienza el filtro de lo anterior comentado*/</h4>
-						<h4>/*En caso de que encuentre en el commit el tag [prod], este agregara un numero 0 y comenzara el proceso de los stages de 
+						<h4>/*En caso de que encuentre en el commit el tag [prod], este agregara un numero 0 y comenzara
+							el proceso de los stages de
 							Produccion y de lo contrario los procesos de develoop*/</h4>
 
 						if (dev != 1) {<br />
 
-							<h4>Desde Aqui Comienza los escenarios para Productivo</h4>
+						<h4>Desde Aqui Comienza los escenarios para Productivo</h4>
 
 						echo "Produccion Stages..."<br /><br />
 
@@ -270,7 +304,8 @@
 
 						} else {<br /><br />
 
-							<h4>/* Desde Aqui Comienza los escenarios para Desarrollo el cual Inhabilita algunos escenarios*/</h4>
+						<h4>/* Desde Aqui Comienza los escenarios para Desarrollo el cual Inhabilita algunos
+							escenarios*/</h4>
 
 						echo "Develoop Stages..."<br /><br />
 
@@ -326,6 +361,8 @@
 
 						}<br />
 						}<br />
+
+					</pre>
 
 					</span>
 
