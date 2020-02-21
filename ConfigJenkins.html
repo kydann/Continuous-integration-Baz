@@ -164,7 +164,11 @@
 										
 											checkout scm
 
-											<h3>/* Las siguientes lineas,  */</h3>
+											<h3>/* Las siguientes lineas,  son dedicadas para obtener el commit del log, en este caso validaremos con el
+												commit una etiqueta que entrara en el filtro para ejecutar ciertos escenarios. En el caso de un 
+												comentario sin etiqueta realizara los procesos de solamente Desarrollo y por lo contrario al hacer un 
+												commit pero con la etiqueta [prod] en el comentario, comenzara el proceso completo para Productivo.
+												*/</h3>
 
 											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() <br/>
 											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/><br/>
