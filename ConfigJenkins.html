@@ -1,361 +1,394 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Configuracion-Jenkins</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<title>Configuracion-Jenkins</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+</head>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+<body>
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>Configuracion Jenkins</strong></a>
-									<ul class="icons">
-										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
-									</ul>
-								</header>
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1>Jenkins Config.</h1>
-									</header>
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong>Configuracion Jenkins</strong></a>
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+					</ul>
+				</header>
+
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h1>Jenkins Config.</h1>
+					</header>
 
 
 
-									<span class="image main"><img src="images/799px-Jenkins_logo_with_title.svg.png" width="520px" height="auto" alt="" /></span>
+					<span class="image main"><img src="images/799px-Jenkins_logo_with_title.svg.png" width="520px"
+							height="auto" alt="" /></span>
 
-									<hr class="major" />
+					<hr class="major" />
 
-									<h2>Instalación</h2>
-									<p>Fedora:</p>
-									<p>yum update</p>
-									<p>yum install jenkins</p>
+					<h2>Instalación</h2>
+					<p>Fedora:</p>
+					<p>yum update</p>
+					<p>yum install jenkins</p>
 
-									<hr class="major" />
-                                    
-                                    <h2>Plugins utilizados</h2>
-									<p>
-                                    <ul>
-                                    	<li>Git</li>
-                                        <li>Gitlab</li>
-                                        <li>Nodejs</li>
-                                        <li>Sonarqube</li>
-                                    </ul>
-                                    </p>
-                                    
-									<hr class="major" />
+					<hr class="major" />
 
-									<h2>Primeros pasos...</h2>
-									<p>Al acceder a Jenkins, una vez teniendo en mano el acces token que se genero desde <strong>Gitlab</strong> es necesario agregar la credencial de acceso para su exitosa comunicación y de esta manera lograr la conexión de ambos. De esta manera sera agregada esta configuracion tal cual lo muestran las imagenes siguientes...</p>
-                                    <p>Nos dirigimos al apartado de credenciales</p>
-                                    <span class="image">
-                                    <img src="images/1490713862_55_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%" height="auto" />
-                                    </span>
-                                    
-									<hr class="major" />
+					<h2>Plugins utilizados</h2>
+					<p>
+						<ul>
+							<li>Git</li>
+							<li>Gitlab</li>
+							<li>Nodejs</li>
+							<li>Sonarqube</li>
+						</ul>
+					</p>
 
-									<h2>Agregar Token</h2>
-									<p>El token obtenido en gitlab es necesario para esta parte ya que es el acceso a jenkins desde gitlab para asi realizar la conexion de ambas tecnologias, en este apartado es recomendable colocar un ID y descripcion de que tipo es esta credencial ya que manejaremos diversas credenciales.</p>
-                                    <span class="image">
-                                    <img src="images/token.png" width="100%" height="auto" />
-                                    </span>
-                                    
-                                    <br/>
-                                    
-                                    <p><strong>Debe dar una credencial asi como el ejemplo:</strong></p>
-                                    
-                                    <span class="image">
-                                    <img src="images/tokenAsign.png" width="100%" height="auto" />
-                                    </span>
-                                    
-									<hr class="major" />
+					<hr class="major" />
 
-									<h2>Configuracion-Jenkins-gitlab</h2>
-									<p>Nos dirigimos al apartado de [Aministrar Jenkins] --> [Configurar Sistema] --> [Gitlab] </p>
-									<p>En la opcion credentials debe ser la agregada anteriormente.</p>
+					<h2>Primeros pasos...</h2>
+					<p>Al acceder a Jenkins, una vez teniendo en mano el acces token que se genero desde
+						<strong>Gitlab</strong> es necesario agregar la credencial de acceso para su exitosa
+						comunicación y de esta manera lograr la conexión de ambos. De esta manera sera agregada esta
+						configuracion tal cual lo muestran las imagenes siguientes...</p>
+					<p>Nos dirigimos al apartado de credenciales</p>
+					<span class="image">
+						<img src="images/1490713862_55_GitLab-Jenkins-una-integración-de-gran-alcance.png" width="100%"
+							height="auto" />
+					</span>
 
-									<span class="image">
-										<img src="images/configGit.png" width="100%" height="auto" />
-									</span>
+					<hr class="major" />
 
-									<hr class="major" />
+					<h2>Agregar Token</h2>
+					<p>El token obtenido en gitlab es necesario para esta parte ya que es el acceso a jenkins desde
+						gitlab para asi realizar la conexion de ambas tecnologias, en este apartado es recomendable
+						colocar un ID y descripcion de que tipo es esta credencial ya que manejaremos diversas
+						credenciales.</p>
+					<span class="image">
+						<img src="images/token.png" width="100%" height="auto" />
+					</span>
 
-									<h2>Agregar un espacio de trabajo.</h2>
-									
-									<p>Regresamos al dashboard de jenkins, es hora de crear una nueva tarea.</p>
-									<span class="image">
-										<img src="images/Selección_001.png" width="100%" height="auto" />
-									</span>
-									
-									<p>Creada la tarea nos mandara a configurar los procesos de jenkins en el proyecto. 
-										<br/>
-										En la pestaña General aparecera en Gitlab Connection la credencial por default antes agregada.
-									</p>
-									<span class="image">
-										<img src="images/Selección_002.png" width="100%" height="auto" />
-									</span>
+					<br />
 
-									<p>En la pestaña triggers solo debe seleccionarse la casilla: 
-										<br/>
-										<strong>Build when a change is pushed to GitLab. GitLab webhook URL: http://172.17.0.1:8080/project/spring (Nota: El link varia depende el host en el que este montado)</strong>
-										<br/>
-									   Es importante tomar en cuenta esta URL y el token que se genera, ya que estas seran ingresadas en la configuración del proyecto guardado en Gitlab 
-									</p>
-									<span class="image">
-										<img src="images/Selección_003.png" width="100%" height="auto" />
-									</span>
+					<p><strong>Debe dar una credencial asi como el ejemplo:</strong></p>
 
-									<p>La configuracion de estas debe estar en Gitlab ubicados en nuestro proyecto, en el cual es necesario ir a [Settings] ---> [Integrations]</p>
-									<span class="image">
-										<img src="images/Selección_004.png" width="100%" height="auto" />
-									</span>
-									<p>Una vez dentro de esta opción tendremos que copiar y pegar la URL y el Token obtenidos para crear el Webhook correspondiente para que se genere la conexion y ejecute el pipeline que debe estar dentro de nuestro proyecto.</p>
-									<span class="image">
-										<img src="images/Selección_006.png" width="100%" height="auto" />
-									</span>
-									<p>Pulsamos en <strong>Add Webhook</strong> para guardar nuestro puente de conexión, el cual nos servira al momento de realizar un commit y push jenkins de esta manera pueda detectar que hubo cambios y comienze a ejecutar el Jenkinsfile (Pipeline).</p>
-									<h2>Regresamos a la terminación de configuracion</h2>
-									<p>El siguiente paso es simplemente <strong>Guardar</strong> las configuraciones.</p>
-									<span class="image">
-										<img src="images/Selección_007.png" width="100%" height="auto" />
-									</span>
+					<span class="image">
+						<img src="images/tokenAsign.png" width="100%" height="auto" />
+					</span>
 
-									<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px" height="30px"/></h2>
-									<span class="image">
-										<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
-										node {
+					<hr class="major" />
 
-											<br/><br/>
+					<h2>Configuracion-Jenkins-gitlab</h2>
+					<p>Nos dirigimos al apartado de [Aministrar Jenkins] --> [Configurar Sistema] --> [Gitlab] </p>
+					<p>En la opcion credentials debe ser la agregada anteriormente.</p>
 
-											<h4>/*Se define el nombre y version de la aplicacion para docker*/</h4>
+					<span class="image">
+						<img src="images/configGit.png" width="100%" height="auto" />
+					</span>
 
-											def pom = readMavenPom file: 'pom.xml'<br/>
-											def developmentArtifactVersion = "${pom.version}"<br/>
-											def jarName = "${pom.name}"<br/>
-											def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br/>
+					<hr class="major" />
 
-											<h4>/* Se imprime el nombre con el que se realizara un Tag */</h4>
-											
-											echo "$jarName" <br/>
+					<h2>Agregar un espacio de trabajo.</h2>
 
-											<h4>/* Se define en este caso la version de Java para el proyecto */</h4>
-											
-											jdk = tool name: 'JDK_11'<br/>
-											env.JAVA_HOME = "${jdk}"<br/>
-											echo "jdk installation path is: ${jdk}"<br/>
-											sh "${jdk}/bin/java -version"<br/>
-											sh '$JAVA_HOME/bin/java -version'<br/><br/>
-										
-											checkout scm<br/>
+					<p>Regresamos al dashboard de jenkins, es hora de crear una nueva tarea.</p>
+					<span class="image">
+						<img src="images/Selección_001.png" width="100%" height="auto" />
+					</span>
 
-											<h4>/* Las siguientes lineas,  son dedicadas para obtener el commit del log, en este caso validaremos con el
-												commit una etiqueta que entrara en el filtro para ejecutar ciertos escenarios. En el caso de un 
-												comentario sin etiqueta realizara los procesos de solamente Desarrollo y por lo contrario al hacer un 
-												commit pero con la etiqueta [prod] en el comentario, comenzara el proceso completo para Productivo.
-												*/</h4>
+					<p>Creada la tarea nos mandara a configurar los procesos de jenkins en el proyecto.
+						<br />
+						En la pestaña General aparecera en Gitlab Connection la credencial por default antes agregada.
+					</p>
+					<span class="image">
+						<img src="images/Selección_002.png" width="100%" height="auto" />
+					</span>
 
-											  def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim() <br/>
-											  def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br/><br/>
+					<p>En la pestaña triggers solo debe seleccionarse la casilla:
+						<br />
+						<strong>Build when a change is pushed to GitLab. GitLab webhook URL:
+							http://172.17.0.1:8080/project/spring (Nota: El link varia depende el host en el que este
+							montado)</strong>
+						<br />
+						Es importante tomar en cuenta esta URL y el token que se genera, ya que estas seran ingresadas
+						en la configuración del proyecto guardado en Gitlab
+					</p>
+					<span class="image">
+						<img src="images/Selección_003.png" width="100%" height="auto" />
+					</span>
 
-											  <h4>/*Imprimimos el valor agregado a las variables*/</h4>
-											  
-											  echo "Commit Message: $result"<br/><br/>
-										
-											  echo "Variable dev: $dev"<br/><br/>
+					<p>La configuracion de estas debe estar en Gitlab ubicados en nuestro proyecto, en el cual es
+						necesario ir a [Settings] ---> [Integrations]</p>
+					<span class="image">
+						<img src="images/Selección_004.png" width="100%" height="auto" />
+					</span>
+					<p>Una vez dentro de esta opción tendremos que copiar y pegar la URL y el Token obtenidos para crear
+						el Webhook correspondiente para que se genere la conexion y ejecute el pipeline que debe estar
+						dentro de nuestro proyecto.</p>
+					<span class="image">
+						<img src="images/Selección_006.png" width="100%" height="auto" />
+					</span>
+					<p>Pulsamos en <strong>Add Webhook</strong> para guardar nuestro puente de conexión, el cual nos
+						servira al momento de realizar un commit y push jenkins de esta manera pueda detectar que hubo
+						cambios y comienze a ejecutar el Jenkinsfile (Pipeline).</p>
+					<h2>Regresamos a la terminación de configuracion</h2>
+					<p>El siguiente paso es simplemente <strong>Guardar</strong> las configuraciones.</p>
+					<span class="image">
+						<img src="images/Selección_007.png" width="100%" height="auto" />
+					</span>
 
-											  <h4>/*Comienza el filtro de lo anterior comentado*/</h4>
-										
-											if (dev != 1) {<br/>
-											
-												echo "Production Stages..."<br/><br/>
-										
-												stage('Iniciando Ejecución'){<br/><br/>
-												
-													echo 'Tardara unos minutos... '<br/><br/>
-													
-												}<br/><br/>
-											
-												stage('Compilacion'){<br/>
-														sh 'java -version'<br/>
-														echo 'Limpiando y Compilando aplicacion'<br/>
-														sh 'mvn clean package'<br/>	
-												}<br/><br/>
-												
-												stage('Sonarqube Coverage'){<br/>
-														echo 'Calidad de codigo'<br/>
-														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br/>										
-												}<br/><br/>
-										
-												stage('Construccion'){ <br/>
-														echo 'Creando JAR'<br/>
-														sh 'mvn install -Dmaven.test.skip=true'<br/>										
-												}<br/><br/>
-										
-												stage('Dockerizando'){<br/>
-														echo 'Dockerizando aplicacion'<br/>
-														sh 'docker images'<br/>
-														sh 'docker ps'<br/>
-														sh "mvn package dockerfile:build"<br/>
-												}<br/><br/>
-												
-												stage('Upload JAR to Nexus repository'){<br/>
-														echo 'Subiendo JAR'<br/>
-														sh 'mvn deploy'<br/>
-												}<br/><br/>
-												
-												stage('Upload to Harbor repository'){<br/>												
-														echo 'Subiendo a Harbor'<br/>
-														sh "docker login -u b366944 -p Promociones123 reg.bazops.corp"<br/>				
-														sh "docker push reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion"<br/>														
-												}<br/><br/>
-												
-												stage('Upload Docker Image to Nexus repository'){<br/>
-														echo 'tag Image'<br/>
-														sh "docker tag reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br/><br/>
-														
-														echo 'Subiendo Imagen docker'<br/>
-														sh "docker push 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br/>
-														sh "docker rmi -f 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br/>
-												}<br/><br/>
-																								
-												stage('Cerrando Ejecución'){<br/>
-													echo 'Completado'<br/>
-												}<br/><br/>
-												
-											} else {<br/><br/>
-											
-												echo "Develoop Stages..."<br/><br/>
-												
-												stage('Iniciando Ejecución'){<br/>
-													echo 'Tardara unos minutos...'<br/>
-												}<br/><br/>
-										
-												stage('Compilacion'){<br/>
-														sh 'java -version'<br/>
-														echo 'Limpiando y Compilando aplicacion'<br/>
-														sh 'mvn clean package'<br/>
-												}<br/><br/>
-												
-												stage('Sonarqube Coverage'){<br/>
-														echo 'Calificando codigo'<br/>
-														sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000 -Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br/>
-												}<br/><br/>
-										
-												stage('Construccion'){<br/>													
-														echo '****************************************************'<br/>
-														echo '******************Inhabilitado**********************'<br/>
-														echo '****************************************************'<br/>										
-												}<br/><br/>
-										
-												stage('Dockerizando'){<br/>													
-													echo '****************************************************'<br/>
-													echo '******************Inhabilitado**********************'<br/>
-													echo '****************************************************'<br/>										
-											}<br/><br/>
-										
-												stage('Upload JAR to Nexus repository'){<br/>													
-													echo '****************************************************'<br/>
-													echo '******************Inhabilitado**********************'<br/>
-													echo '****************************************************'<br/>										
-											}<br/><br/>
-												
-												stage('Upload to Harbor repository'){<br/>													
-													echo '****************************************************'<br/>
-													echo '******************Inhabilitado**********************'<br/>
-													echo '****************************************************'<br/>										
-											}<br/><br/>
-										
-												stage('Upload Docker Image to Nexus repository'){<br/>													
-													echo '****************************************************'<br/>
-													echo '******************Inhabilitado**********************'<br/>
-													echo '****************************************************'<br/>										
-											}<br/><br/>
-												
-												stage('Cerrando Ejecución'){<br/>
-													echo 'Completado'<br/>
-												}<br/><br/>
-										
-											}<br/>
-										}<br/>
-										
-									</span>
-									
-									<p>Una vez hecho un push comenzara a ejecutar los pasos establecidos en el Jenkinsfile si es todo correcto pintara el Stage View en verde pero en caso de algun fallo debera mandarlo de color Rojo.</p>
-									<span class="image">
-										<img src="images/stages.PNG" width="100%" height="auto" />
-									</span>
+					<h2>Ejemplo de Pipeline para proyecto Spring boot <img src="images/pipe.png" width="30px"
+							height="30px" /></h2>
+					<span class="image">
+						<!--<img src="images/pipeline.png" width="100%" height="auto" />-->
+						node {
 
-								</section>
+						<br /><br />
 
-						</div>
-					</div>
+						<h4>/*Se define el nombre y version de la aplicacion para docker*/</h4>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+						def pom = readMavenPom file: 'pom.xml'<br />
+						def developmentArtifactVersion = "${pom.version}"<br />
+						def jarName = "${pom.name}"<br />
+						def cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");<br />
 
-							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+						<h4>/* Se imprime el nombre con el que se realizara un Tag */</h4>
 
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Inicio</a></li>
-									</ul>
-								</nav>
-                                
-								<section>
-									<header class="major">
-										<h2>Contacto</h2>
-									</header>
-									<p></p>
-									<ul class="contact">
-										<li class="fa-envelope-o"><a href="#">christian.sayago@elektra.com.mx</a></li>
-										<li class="fa-phone">(55) 21-00-83-83</li>
-										<li class="fa-home">Torre Jade<br />
-										</li>
-									</ul>
-								</section>
+						echo "$jarName" <br />
 
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Grupo Salinas. All rights reserved. Design: <a href="#">Banco Azteca</a>.</p>
-								</footer>
+						<h4>/* Se define en este caso la version de Java para el proyecto */</h4>
 
-						</div>
-					</div>
+						jdk = tool name: 'JDK_11'<br />
+						env.JAVA_HOME = "${jdk}"<br />
+						echo "jdk installation path is: ${jdk}"<br />
+						sh "${jdk}/bin/java -version"<br />
+						sh '$JAVA_HOME/bin/java -version'<br /><br />
+
+						checkout scm<br />
+
+						<h4>/* Las siguientes lineas, son dedicadas para obtener el commit del log, en este caso
+							validaremos con el
+							commit una etiqueta que entrara en el filtro para ejecutar ciertos escenarios. En el caso de
+							un
+							comentario sin etiqueta realizara los procesos de solamente Desarrollo y por lo contrario al
+							hacer un
+							commit pero con la etiqueta [prod] en el comentario, comenzara el proceso completo para
+							Productivo.
+							*/</h4>
+
+						def result = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+						<br />
+						def dev = sh (script: "git log -1 | grep '.*\\[prod\\].*'", returnStatus: true)<br /><br />
+
+						<h4>/*Imprimimos el valor agregado a las variables*/</h4>
+
+						echo "Commit Message: $result"<br /><br />
+
+						echo "Variable dev: $dev"<br /><br />
+
+						<h4>/*Comienza el filtro de lo anterior comentado*/</h4>
+						<h4>/*En caso de que encuentre en el commit el tag [prod], este agregara un numero 0 y comenzara el proceso de los stages de 
+							Produccion y de lo contrario los procesos de develoop*/</h4>
+
+						if (dev != 1) {<br />
+
+						echo "Produccion Stages..."<br /><br />
+
+						stage('Iniciando Ejecución'){<br /><br />
+
+						echo 'Tardara unos minutos... '<br /><br />
+
+						}<br /><br />
+
+						stage('Compilacion'){<br />
+						sh 'java -version'<br />
+						echo 'Limpiando y Compilando aplicacion'<br />
+						sh 'mvn clean package'<br />
+						}<br /><br />
+
+						stage('Sonarqube Coverage'){<br />
+						echo 'Calidad de codigo'<br />
+						sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000
+						-Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br />
+						}<br /><br />
+
+						stage('Construccion'){ <br />
+						echo 'Creando JAR'<br />
+						sh 'mvn install -Dmaven.test.skip=true'<br />
+						}<br /><br />
+
+						stage('Dockerizando'){<br />
+						echo 'Dockerizando aplicacion'<br />
+						sh 'docker images'<br />
+						sh 'docker ps'<br />
+						sh "mvn package dockerfile:build"<br />
+						}<br /><br />
+
+						stage('Upload JAR to Nexus repository'){<br />
+						echo 'Subiendo JAR'<br />
+						sh 'mvn deploy'<br />
+						}<br /><br />
+
+						stage('Upload to Harbor repository'){<br />
+						echo 'Subiendo a Harbor'<br />
+						sh "docker login -u b366944 -p Promociones123 reg.bazops.corp"<br />
+						sh "docker push reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion"<br />
+						}<br /><br />
+
+						stage('Upload Docker Image to Nexus repository'){<br />
+						echo 'tag Image'<br />
+						sh "docker tag reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion
+						10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br /><br />
+
+						echo 'Subiendo Imagen docker'<br />
+						sh "docker push 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br />
+						sh "docker rmi -f 10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br />
+						}<br /><br />
+
+						stage('Cerrando Ejecución'){<br />
+						echo 'Completado'<br />
+						}<br /><br />
+
+						} else {<br /><br />
+
+						echo "Develoop Stages..."<br /><br />
+
+						stage('Iniciando Ejecución'){<br />
+						echo 'Tardara unos minutos...'<br />
+						}<br /><br />
+
+						stage('Compilacion'){<br />
+						sh 'java -version'<br />
+						echo 'Limpiando y Compilando aplicacion'<br />
+						sh 'mvn clean package'<br />
+						}<br /><br />
+
+						stage('Sonarqube Coverage'){<br />
+						echo 'Calificando codigo'<br />
+						sh 'mvn sonar:sonar -Dsonar.host.url=http://10.51.251.49:9000
+						-Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br />
+						}<br /><br />
+
+						stage('Construccion'){<br />
+						echo '****************************************************'<br />
+						echo '******************Inhabilitado**********************'<br />
+						echo '****************************************************'<br />
+						}<br /><br />
+
+						stage('Dockerizando'){<br />
+						echo '****************************************************'<br />
+						echo '******************Inhabilitado**********************'<br />
+						echo '****************************************************'<br />
+						}<br /><br />
+
+						stage('Upload JAR to Nexus repository'){<br />
+						echo '****************************************************'<br />
+						echo '******************Inhabilitado**********************'<br />
+						echo '****************************************************'<br />
+						}<br /><br />
+
+						stage('Upload to Harbor repository'){<br />
+						echo '****************************************************'<br />
+						echo '******************Inhabilitado**********************'<br />
+						echo '****************************************************'<br />
+						}<br /><br />
+
+						stage('Upload Docker Image to Nexus repository'){<br />
+						echo '****************************************************'<br />
+						echo '******************Inhabilitado**********************'<br />
+						echo '****************************************************'<br />
+						}<br /><br />
+
+						stage('Cerrando Ejecución'){<br />
+						echo 'Completado'<br />
+						}<br /><br />
+
+						}<br />
+						}<br />
+
+					</span>
+
+					<p>Una vez hecho un push comenzara a ejecutar los pasos establecidos en el Jenkinsfile si es todo
+						correcto pintara el Stage View en verde pero en caso de algun fallo debera mandarlo de color
+						Rojo.</p>
+					<span class="image">
+						<img src="images/stages.PNG" width="100%" height="auto" />
+					</span>
+
+				</section>
 
 			</div>
+		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+		<!-- Sidebar -->
+		<div id="sidebar">
+			<div class="inner">
 
-	</body>
+				<!-- Search -->
+				<section id="search" class="alt">
+					<form method="post" action="#">
+						<input type="text" name="query" id="query" placeholder="Search" />
+					</form>
+				</section>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<header class="major">
+						<h2>Menu</h2>
+					</header>
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+					</ul>
+				</nav>
+
+				<section>
+					<header class="major">
+						<h2>Contacto</h2>
+					</header>
+					<p></p>
+					<ul class="contact">
+						<li class="fa-envelope-o"><a href="#">christian.sayago@elektra.com.mx</a></li>
+						<li class="fa-phone">(55) 21-00-83-83</li>
+						<li class="fa-home">Torre Jade<br />
+						</li>
+					</ul>
+				</section>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<p class="copyright">&copy; Grupo Salinas. All rights reserved. Design: <a href="#">Banco
+							Azteca</a>.</p>
+				</footer>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
+
+</body>
+
 </html>
