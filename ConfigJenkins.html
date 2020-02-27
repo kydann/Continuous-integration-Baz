@@ -37,7 +37,7 @@
 					<header class="main">
 						<table>
 							<tr>
-								<td align="center"><img src="images/799px-Jenkins_logo_with_title.svg.png" width="220px" height="auto" alt="" /></td>
+								<td align="center"><img src="images/799px-Jenkins_logo_with_title.svg.png" width="320px" height="auto" alt="" /></td>
 							</tr>
 						</table>
 						
@@ -46,21 +46,70 @@
 					<hr class="major" />
 
 					<h2>Instalación</h2>
-					<p>Fedora:</p>
-					<p>$ yum update</p>
-					<p>$ yum install jenkins</p>
+
+					<table style="font-size: smaller;">
+						<thead>
+							<tr>
+								<td>Fedora</td>
+								<td>Linux</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>$ wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo</td>
+								<td>$ wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -</td>
+							</tr>
+							<tr>
+								<td>$ rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key</td>
+								<td>$ sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'</td>
+							</tr>
+							<tr>
+								<td>$ yum update</td>
+								<td>$ sudo apt-get update</td>
+							</tr>
+							<tr>
+								<td>$ yum install jenkins</td>
+								<td>$ sudo apt-get install jenkins</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<hr class="major" />
 
 					<h2>Plugins utilizados</h2>
-					<p>
-						<ul>
-							<li>Git</li>
-							<li>Gitlab</li>
-							<li>Nodejs</li>
-							<li>Sonarqube</li>
-						</ul>
-					</p>
+
+					<table>
+						<tbody>
+							<tr>
+								<td>Git Plugin</td>
+								<td>Gitlab</td>
+								<td>Sonarqube</td>
+								<td>Docker Plugin</td>
+								<td>Cucumber Reports</td>
+							</tr>
+							<tr>
+								<td>NodeJS</td>
+								<td>Artifactory Plugin</td>
+								<td>Build Timeout</td>
+								<td>Gradle Plugin</td>
+								<td>JaCoCo</td>
+							</tr>
+							<tr>
+								<td>JQuery</td>
+								<td>JUnit Plugin</td>
+								<td>Kubernetes</td>
+								<td>Logstash</td>
+								<td>Maven Integration</td>
+							</tr>
+							<tr>
+								<td>OpenJDK-native-plugin</td>
+								<td>Pipeline</td>
+								<td>Pipeline Agregator View</td>
+								<td>Pipeline: Declarative</td>
+								<td>Quality Gates Plugin</td>
+							</tr>
+						</tbody>
+					</table>
 
 					<hr class="major" />
 
