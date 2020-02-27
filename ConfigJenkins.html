@@ -58,15 +58,15 @@
 							</tr>
 							<tr>
 								<td>$ rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key</td>
-								<td>$ sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'</td>
+								<td>$ sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'</td>
 							</tr>
 							<tr>
 								<td>$ yum update</td>
-								<td>$ sudo apt-get update</td>
+								<td>$ apt-get update</td>
 							</tr>
 							<tr>
 								<td>$ yum install jenkins</td>
-								<td>$ sudo apt-get install jenkins</td>
+								<td>$ apt-get install jenkins</td>
 							</tr>
 					</table>
 
@@ -74,7 +74,7 @@
 
 					<h2>Plugins utilizados</h2>
 
-					<table  class="main" style="width: 100%; font-size: smaller;">
+					<table class="main" style="width: 100%; font-size: smaller;">
 							<tr>
 								<td>Git Plugin</td>
 								<td>Gitlab</td>
