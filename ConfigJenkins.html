@@ -241,31 +241,16 @@
 
 						<p class="kw1"> node { </p>
 
-						<p class="par">/*Se define el nombre y version de la aplicacion para docker*/</p>
+						<p class="par">/*Se define la carga del archivo de Jenkinsfile en el server.*/</p>
 
 						<p class="st0">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def pom = readMavenPom file: 'pom.xml'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def developmentArtifactVersion = "${pom.version}"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def jarName = "${pom.name}"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def
-							cleanVersion=developmentArtifactVersion.replaceAll("-SNAPSHOT","");
+							&nbsp;&nbsp;&nbsp;&nbsp;node{<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def jenkinsfile = load "path/jenkinsfile"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jenkinsfile:<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
 						</p>
 
-						<p class="par">/* Se imprime el nombre con el que se realizara un Tag */</p>
-
-						<p class="kw1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "$jarName"</p>
-
-						<p class="par">/* Se define en este caso la version de Java para el proyecto */</p>
-
-						<span class="st0">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jdk = tool name: 'JDK_11'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env.JAVA_HOME = "${jdk}"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "jdk installation path is: ${jdk}"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh "${jdk}/bin/java -version"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh '$JAVA_HOME/bin/java -version'
-						</span>
-
-						<br /><br />
+						<br />
 
 						<p class="kw1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;checkout scm</p>
 
@@ -313,113 +298,21 @@
 							"Produccion
 							Stages..."<br /><br />
 
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Iniciando
-							Ejecución'){<br /><br />
+							<p class="kw1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ejemplo de lo que puede contener Jenkinsfile que se obtiene desde el path donde se encuentre.</p><br />
 
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Tardara unos
-							minutos... '<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Compilacion'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'java
-							-version'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Limpiando y
-							Compilando aplicacion'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'mvn clean
-							package'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Sonarqube
-							Coverage'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Calidad de
-							codigo'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'mvn sonar:sonar
-							-Dsonar.host.url=http://10.51.251.49:9000
-							-Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Construccion'){
-							<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Creando
-							JAR'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'mvn install
-							-Dmaven.test.skip=true'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Dockerizando'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Dockerizando
-							aplicacion'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'docker
-							images'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'docker ps'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							"mvn package
-							dockerfile:build"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Upload JAR to
-							Nexus repository'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Subiendo
-							JAR'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'mvn
-							deploy'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Upload to
-							Harbor
-							repository'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Subiendo a
-							Harbor'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							"docker login -u
-							b366944 -p Promociones123 reg.bazops.corp"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							"docker push
-							reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Upload Docker
-							Image to Nexus repository'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'tag
-							Image'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							"docker tag
-							reg.bazops.corp/cyc-msorques-test/$jarName:$developmentArtifactVersion
-							10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Subiendo
-							Imagen
-							docker'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							"docker push
-							10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							"docker rmi -f
-							10.51.251.49:8082/reg.bazops.corp/cyc-msorques-test/$jarName"<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Cerrando
-							Ejecución'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Completado'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
+						<span class="st0">
+							&nbsp;&nbsp;&nbsp;&nbsp;node { <br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Compilacion'){<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh "mvn clean package"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Construccion de proyecto'){<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh "mvn install"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Deploy'){<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh "mvn deploy"<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+							&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+						</span>
 						</span>
 
 						<p class="kw1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else { </p>
@@ -430,81 +323,7 @@
 						<span class="st0">
 
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							"Develoop
-							Stages..."<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Iniciando
-							Ejecución'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Tardara unos
-							minutos...'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Compilacion'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'java
-							-version'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Limpiando y
-							Compilando aplicacion'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'mvn clean
-							package'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Sonarqube
-							Coverage'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Calificando
-							codigo'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sh
-							'mvn sonar:sonar
-							-Dsonar.host.url=http://10.51.251.49:9000-Dsonar.login=d8d78be189c327a67dd7da4626686a7197674164'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Construccion'){<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'******************Inhabilitado**********************'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Dockerizando'){<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'******************Inhabilitado**********************'<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Upload JAR to
-							Nexus repository'){<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'******************Inhabilitado**********************'<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Upload to
-							Harbor repository'){<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'******************Inhabilitado**********************'<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Upload Docker
-							Image to Nexus repository'){<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'******************Inhabilitado**********************'<br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stage('Cerrando
-							Ejecución'){<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo
-							'Completado'<br />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
-
+							"Develoop Stages..."<br /><br />
 						</span>
 
 						<p class="kw1">
